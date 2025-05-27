@@ -34,3 +34,13 @@ Below is minimum requirements and instruction on how to run this project in your
 5. Run `npm run build`.
 5. Run `php artisan migrate:fresh --seed`.
 7. To run it with Laravel server run `php artisan serve`.
+8. 
+### Code style
+
+We are using
+the [PSR-4 autoloading standard](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-4-autoloader.md),
+meaning that for classes, methods, and code structure are using the standard to make the interoperability from composer
+is well applied.
+
+More information can be found [here](https://laravel.com/docs/9.x/contributions#coding-style), regarding stuffs like
+PHPDoc and StyleCI.
