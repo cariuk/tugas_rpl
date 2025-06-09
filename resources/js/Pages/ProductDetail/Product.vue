@@ -9,16 +9,17 @@ import GuestLayout from "@/Layouts/GuestLayout.vue";
                 <img src="/assets/placeholder-laptop.png" class="w-full h-full object-contain" alt="Product Image"/>
             </div>
             <div class="flex flex-col gap-10">
-                <div class="text-[26px] font-bold">Product Name</div>
-                <div class="text-[26px] font-bold text-green-600">Rp9.999.999</div>
+                <div class="text-[26px] font-bold">{{product.model}}</div>
+                <div class="text-[26px] font-bold text-green-600">Rp{{ product.harga.toLocaleString() }}</div>
                 <div class="flex flex-col gap-8 text-xl py-4 px-8 w-full border rounded shadow">
-                    <div>Processor : <span class="text-neutral-400">Lorem Ipsum</span></div>
-                    <div>Ram : <span class="text-neutral-400">Lorem Ipsum</span></div>
-                    <div>HDD/SSD : <span class="text-neutral-400">Lorem Ipsum</span></div>
-                    <div>VGA : <span class="text-neutral-400">Lorem Ipsum</span></div>
+                    <div>Processor : <span class="text-neutral-400">{{product.deskripsi.cpu}}</span></div>
+                    <div>Ram : <span class="text-neutral-400">{{product.deskripsi.ram}}</span></div>
+                    <div>HDD/SSD : <span class="text-neutral-400">{{product.deskripsi.penyimpanan}}</span></div>
+                    <div>VGA : <span class="text-neutral-400">{{product.deskripsi.gpu}}</span></div>
                     <div class="flex w-full items-center justify-center gap-8">
-                        <div>Dimensi:  <span class="text-neutral-400">10cmx5cm</span></div>
-                        <div>Berat: <span class="text-neutral-400">400g</span></div>
+                        <div>Berat: <span class="text-neutral-400">{{product.bobot}}</span></div>
+                        <div>CPU Score: <span class="text-neutral-400">{{product.cpu_score}}</span></div>
+                        <div>GPU Scoore: <span class="text-neutral-400">{{product.gpu_score}}</span></div>
                     </div>
                 </div>
                 <div>
@@ -34,9 +35,12 @@ import GuestLayout from "@/Layouts/GuestLayout.vue";
 </template>
 
 <script>
+import {ref} from "vue";
+
 export default {
     name: 'Welcome',
     props: {
+        product: ref({}),
         title: {
             type: String,
             required: true,
