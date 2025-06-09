@@ -1,6 +1,7 @@
 <script setup>
 import ApplicationLogo from '@/Components/ApplicationLogo.vue';
 import {Head} from '@inertiajs/vue3';
+import { ModalsContainer } from 'vue-final-modal'
 </script>
 
 <template>
@@ -22,7 +23,7 @@ import {Head} from '@inertiajs/vue3';
             </div>
         </div>
     </div>
-
+    <modals-container></modals-container>
 </template>
 
 <script>
