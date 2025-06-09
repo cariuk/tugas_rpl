@@ -32,9 +32,9 @@ Below is minimum requirements and instruction on how to run this project in your
 3. Copy .env.example to .env.
 4. Open the .env file and fill out your DB information.
 5. Run `npm run build`.
-5. Run `php artisan migrate:fresh --seed`.
-7. To run it with Laravel server run `php artisan serve`.
-8. 
+6. Run `php artisan migrate`.
+7. Run `php artisan db:seed`.
+8. To run it with Laravel server run `php artisan serve`.
 ### Code style
 
 We are using
