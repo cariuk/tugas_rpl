@@ -20,6 +20,9 @@
         "vue": "^3.4.0"
     },
     "dependencies": {
+        "@formkit/icons": "^1.6.9",
+        "@formkit/pro": "^0.127.23",
+        "@formkit/vue": "^1.6.9",
         "vue-final-modal": "^4.5.5"
     }
 }

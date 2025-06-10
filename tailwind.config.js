@@ -8,8 +8,9 @@ export default {
         './storage/framework/views/*.php',
         './resources/views/**/*.blade.php',
         './resources/js/**/*.vue',
+        'formkit.theme.js'
     ],
-
+    darkMode: 'selector',
     theme: {
         extend: {
             fontFamily: {
@@ -18,5 +19,7 @@ export default {
         },
     },
 
-    plugins: [forms],
+    plugins: [
+        // forms
+    ],
 };
