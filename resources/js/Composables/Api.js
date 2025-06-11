@@ -2,7 +2,7 @@ import {ref} from "vue"
 import Axios from "axios"
 import qs from 'qs'
 import {router} from '@inertiajs/vue3'
-// import {showNotification} from "@/composables/Notification"
+import {showNotification} from "@/composables/Notification"
 
 const parseParams = (params) => {
     if (params !== undefined) {
@@ -125,8 +125,8 @@ function _handleRedirectPage(redirect) {
 }
 
 function _handleError(error) {
-    if (error.response.status === 422 && showNotification){
-        //showNotification(error.response.data.title ?? '', error.response.data.message, 'warning')
+    if (error.response.status === 422){
+        showNotification(error.response.data.title ?? '', error.response.data.message, 'warning')
         return false;
     } else {
         let statusUnauthorized = [401, 419]
@@ -134,6 +134,6 @@ function _handleError(error) {
         if (statusUnauthorized.includes(error.response.status))
             router.reload({})
 
-        //showNotification(error.response.data.title ?? '', error.response.data.message, 'error')
+        showNotification(error.response.data.title ?? '', error.response.data.message, 'error')
     }
 }

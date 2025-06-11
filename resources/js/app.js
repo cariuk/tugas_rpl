@@ -13,6 +13,9 @@ import { createApp, h } from 'vue';
 import { ZiggyVue } from '../../vendor/tightenco/ziggy';
 import {createVfm} from "vue-final-modal";
 
+import VueSweetalert2 from 'vue-sweetalert2';
+import 'sweetalert2/dist/sweetalert2.min.css';
+
 const vfm = createVfm();
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
@@ -36,6 +39,7 @@ createInertiaApp({
                 })))
             .use(vfm)
             .use(plugin)
+            .use(VueSweetalert2)
             .use(ZiggyVue)
             .mount(el);
     },
