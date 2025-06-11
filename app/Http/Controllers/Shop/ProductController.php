@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Shop;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Product\GetProductRequest;
 use App\Http\Resources\ProductResource;
 use App\Models\Product;
+use App\Services\AHPService;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\JsonResponse;
 use Inertia\Inertia;
@@ -12,13 +14,19 @@ use Inertia\Inertia;
 class ProductController extends Controller
 {
     public function __construct(
-        protected Product $product)
+        protected Product    $product,
+        protected AHPService $ahpService,
+    )
     {
     }
 
-    public function get(): JsonResponse
+    public function get(GetProductRequest $request): JsonResponse
     {
         $collection = $this->product->get();
+
+        if ($request->has("recommendation") && $request->get("recommendation") == "true") {
+            $collection = $this->ahpService->getRecommendations($collection);
+        }
 
         return response()->json([
             "status" => "success",
