@@ -74,7 +74,7 @@ import {Link, router} from '@inertiajs/vue3'
                         <div class="w-full border-b border-green-400 border-opacity-30"></div>
                         <div v-if="recomendationMetodePengiriman.recommended_option"
                              class="w-full border-b border-green-400 border-opacity-30 p-2 bg-green-100 rounded shadow">
-                            <div> {{ recomendationMetodePengiriman.message }}</div>
+                            <div> Rekomendasi Pengiriman Terbaik </div>
                             <div>
                                 {{ recomendationMetodePengiriman.recommended_option.description + ' | ' + recomendationMetodePengiriman.recommended_option.name + ' | ' + recomendationMetodePengiriman.recommended_option.etd + ' | ' + recomendationMetodePengiriman.recommended_option.cost.toLocaleString() }}
                             </div>
