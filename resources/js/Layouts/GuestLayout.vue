@@ -13,7 +13,7 @@ import { ModalsContainer } from 'vue-final-modal'
         </div>
     </div>
     <div class="flex flex-col justify-between h-full min-h-screen">
-        <div class="mb-12 h-full min-h-full">
+        <div class="h-full min-h-full">
             <slot></slot>
         </div>
         <div class="flex flex-col mix-w-screen border-t border-gray-200 bg-gray-100 shadow">

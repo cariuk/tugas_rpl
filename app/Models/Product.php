@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Product extends Model
 {
@@ -21,4 +22,11 @@ class Product extends Model
     protected $casts = [
         'deskripsi' => 'object',
     ];
+
+    protected $with = ['merk'];
+
+    public function merk(): BelongsTo
+    {
+        return $this->belongsTo(Merk::class);
+    }
 }
