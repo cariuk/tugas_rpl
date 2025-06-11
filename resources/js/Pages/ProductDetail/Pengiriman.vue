@@ -72,6 +72,13 @@ import {Link, router} from '@inertiajs/vue3'
                             @click="calculateDomesticCost"
                         />
                         <div class="w-full border-b border-green-400 border-opacity-30"></div>
+                        <div v-if="recomendationMetodePengiriman.recommended_option"
+                             class="w-full border-b border-green-400 border-opacity-30">
+                            <div> {{ recomendationMetodePengiriman.message }}</div>
+                            <div>
+                                {{ recomendationMetodePengiriman.recommended_option.description + ' | ' + recomendationMetodePengiriman.recommended_option.name + ' | ' + recomendationMetodePengiriman.recommended_option.etd + ' | ' + recomendationMetodePengiriman.recommended_option.cost.toLocaleString() }}
+                            </div>
+                        </div>
                         <FormKit
                             v-if="metodePengiriman.length > 0"
                             v-model="checkOutTransaction.metode_pengiriman"
@@ -155,6 +162,7 @@ export default {
             searchLocation: "",
             locations: ref([]),
             metodePengiriman: ref([]),
+            recomendationMetodePengiriman: ref({}),
             checkOutTransaction: {
                 product_id: this.product.id,
                 sub_total: this.product.harga,
@@ -215,6 +223,11 @@ export default {
                     value: item,
                 }
             })
+
+            this.recomendationMetodePengiriman = result.best_option
+            if (this.recomendationMetodePengiriman.recommended_option) {
+                this.checkOutTransaction.metode_pengiriman = this.recomendationMetodePengiriman.recommended_option
+            }
         },
         async gotoPayment() {
             let result = await post(route('payment'), this.checkOutTransaction)
