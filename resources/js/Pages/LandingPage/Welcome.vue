@@ -7,7 +7,10 @@ import ListProducts from "@/Pages/LandingPage/ListProducts.vue";
     <GuestLayout :title="title">
         <div class="grid gap-2">
             <div class="flex items-center justify-center w-full h-[704px] max-[704px] m-auto shadow">
-                <div class="w-[730px] h-[314.99px] bg-grey-50 shadow rounded"></div>
+                <div class="flex flex-col w-[730px] h-[314.99px] bg-neutral-100 shadow rounded items-center justify-center text-center">
+                    <div class="font-bold text-[40px]">Rekomendasi Laptop Terbaik</div>
+                    <div class="">Tak Perlu Bingung Pilih Laptop – Kami Tahu yang Kamu Butuhkan!</div>
+                </div>
             </div>
             <ListProducts />
         </div>

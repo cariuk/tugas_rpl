@@ -1,5 +1,6 @@
 <script setup>
 import GuestLayout from "@/Layouts/GuestLayout.vue";
+import VButtonFormKit from "@/Components/VButtonFormKit.vue";
 import {Link, router} from '@inertiajs/vue3'
 </script>
 
@@ -110,19 +111,22 @@ import {Link, router} from '@inertiajs/vue3'
                             Rp{{ (checkOutTransaction.sub_total + checkOutTransaction.ongkos_kirim).toLocaleString() }}
                         </div>
                     </div>
-                    <div class="flex">
-                        <FormKit
-                            type="button"
-                            label="Kembali Detail Produk"
-                            prefix-icon="arrowLeft"
-                            @click="router.visit(route('product-detail', { id: product.id }))"
-                        />
-                        <FormKit
-                            type="button"
-                            label="Lanjutkan Ke Pembayaran"
-                            prefix-icon="flag"
-                            @click="gotoPayment"
-                        />
+                    <div class="flex justify-between gap-4">
+                        <div>
+                            <VButtonFormKit
+                                label="Kembali Detail Produk"
+                                prefix-icon="arrowLeft"
+                                @click="router.visit(route('product-detail', { id: product.id }))"
+                                color="danger"
+                            />
+                        </div>
+                        <div>
+                            <VButtonFormKit
+                                label="Lanjutkan Ke Pembayaran"
+                                prefix-icon="flag"
+                                @click="gotoPayment"
+                            />
+                        </div>
                     </div>
 
                 </div>
@@ -133,7 +137,7 @@ import {Link, router} from '@inertiajs/vue3'
 
 <script>
 import {ref} from "vue";
-import {get} from "@/Composables/Api.js";
+import {get, post} from "@/Composables/Api.js";
 import {search} from "@formkit/icons";
 
 export default {
@@ -213,7 +217,13 @@ export default {
             })
         },
         async gotoPayment() {
+            let result = await post(route('payment'), this.checkOutTransaction)
+            if (result === undefined) {
+                this.$swal("Gagal Melakukan Penyimpana")
+                return false;
+            }
 
+            result = result._value.data
         }
     }
 }
