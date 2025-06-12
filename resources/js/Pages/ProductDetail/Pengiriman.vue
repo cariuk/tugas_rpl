@@ -27,6 +27,28 @@ import {Link, router} from '@inertiajs/vue3'
                                 validation-visibility="live"
                             />
                         </div>
+                        <div class="flex">
+                            <FormKit
+                                v-model="checkOutTransaction.phone_peneriman"
+                                type="text"
+                                name="phone_peneriman"
+                                label="Nomor Tlp Penerima"
+                                placeholder="Silahkan Tuliskan Kontak Penerima"
+                                validation="required"
+                                validation-visibility="live"
+                            />
+                        </div>
+                        <div class="flex">
+                            <FormKit
+                                v-model="checkOutTransaction.email_peneriman"
+                                type="email"
+                                name="email_peneriman"
+                                label="Email Penerima"
+                                placeholder="Silahkan Tuliskan Email Penerima"
+                                validation="required"
+                                validation-visibility="live"
+                            />
+                        </div>
                         <div class="w-full border-b border-green-400 border-opacity-30"></div>
                         <div class="flex justify-center items-center w-full gap-2">
                             <FormKit
@@ -34,7 +56,7 @@ import {Link, router} from '@inertiajs/vue3'
                                 type="text"
                                 name="pencarianLokasi"
                                 label="Pencarian Tujuan Pengiriman"
-                                placeholder="Silahkan Tuliskan Nama Penerima"
+                                placeholder="Silahkan Tuliskan Kode Pos / Kecamatan / Kota Kabupaten"
                             />
                             <div class="pt-6">
                                 <FormKit
@@ -230,13 +252,67 @@ export default {
             }
         },
         async gotoPayment() {
-            let result = await post(route('payment'), this.checkOutTransaction)
-            if (result === undefined) {
-                this.$swal("Gagal Melakukan Penyimpana")
-                return false;
-            }
-
-            result = result._value.data
+            this.$swal({
+                title: "Apa kamu yakin?",
+                text: `Anda Melanjutkan Ke Pembayaran ini!`,
+                icon: "warning",
+                showCancelButton: true,
+                reverseButtons: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Iya!",
+                cancelButtonText: "Batal",
+            }).then(async (result) => {
+                if (result.isConfirmed) {
+                    this.$swal.fire({
+                        allowOutsideClick: false,
+                        timerProgressBar: true,
+                        didOpen: async () => {
+                            this.$swal.showLoading();
+                            // let result = await post(route('payment'), this.checkOutTransaction)
+                            // if (result === undefined) {
+                            //     this.$swal("Gagal Melakukan Penyimpanan")
+                            //     return false;
+                            // }
+                            //
+                            // result = result._value.data;
+                            // let result = await post(
+                            //     this.storeUrl,
+                            //     this.formData
+                            // ).finally(() => {
+                            //     this.$swal.close();
+                            // })
+                            //
+                            // result = await result._value;
+                            //
+                            // if (result.status !== 200) {
+                            //     this.$swal({
+                            //         icon: 'error',
+                            //         title: result.message
+                            //     });
+                            //
+                            //     return false
+                            // }
+                            //
+                            // if (result.status === 422) {
+                            //     this.formErrors = handleValidationMessage(
+                            //         result,
+                            //         this.formErrors
+                            //     );
+                            //     return false
+                            // }
+                            //
+                            // result = result.data
+                            // Object.assign(this.data, result.data);
+                            // this.data.action = this.action
+                            //
+                            // this.modal.close()
+                            this.$swal.close();
+                        },
+                        willClose: () => {}
+                    });
+                }
+            });
         }
     }
 }
